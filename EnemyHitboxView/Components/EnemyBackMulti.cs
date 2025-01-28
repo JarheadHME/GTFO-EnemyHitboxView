@@ -61,15 +61,12 @@ namespace EnemyHitboxView.Components
             forward.positionCount = 2;
             forward.SetPosition(0, enemy.Position + floorOffset);
             forward.SetPosition(1, enemy.Position + floorOffset + forwardVector);
-            // Repeat for chest (if it exists).
-            if (enemy.ModelRef.m_chestBone != null)
-            {
-                chest.enabled = true;
-                Vector3 chestVector = enemy.ModelRef.m_chestBone.up * -1f;
-                chest.positionCount = 2;
-                chest.SetPosition(0, enemy.Position + floorOffset);
-                chest.SetPosition(1, enemy.Position + floorOffset + chestVector);
-            }
+            // Repeat for chest.
+            chest.enabled = true;
+            Vector3 chestVector = enemy.ModelRef.m_chestBone == null ? enemy.Damage.transform.forward : enemy.ModelRef.m_chestBone.up * -1f;
+            chest.positionCount = 2;
+            chest.SetPosition(0, enemy.Position + floorOffset);
+            chest.SetPosition(1, enemy.Position + floorOffset + chestVector);
         }
     }
 }
